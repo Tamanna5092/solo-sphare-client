@@ -24,7 +24,7 @@ const Register = () => {
       console.log(result.user);
       await updateUserProfile(name, photo);
       setUser({ ...user, displayName: name, photoURL: photo });
-      // navigate('/')
+      navigate('/')
       toast.success("Sign up successful");
     } catch (error) {
       console.log(error);
