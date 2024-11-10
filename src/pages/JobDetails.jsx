@@ -10,12 +10,12 @@ const JobDetails = () => {
   const [startDate, setStartDate] = useState(new Date());
     const {user} = useContext(AuthContext)
     const job = useLoaderData()
-    const { _id, job_title, category, description, max_price, min_price, deadline, buyer_email} = job || {};
+    const { _id, job_title, category, description, max_price, min_price, deadline, buyer_email, buyer} = job || {};
 
 
     const handleFormSubmission = async e => {
         e.preventDefault()
-        if(user?.email === buyer_email){
+        if(user?.email === buyer.email){
           return toast.error('Action not permitted')
         }
         const form = e.target;
@@ -24,7 +24,6 @@ const JobDetails = () => {
         if (price < parseFloat(min_price)){
           return toast.error('Offer more or at least equal to Minimum Price.')
         }
-          
         const comment = form.comment.value
         const deadline = startDate
         const email = user?.email
@@ -80,14 +79,14 @@ const JobDetails = () => {
           <div className='flex items-center gap-5'>
             <div>
               <p className='mt-2 text-sm  text-gray-600 '>
-                Name: Tamanna
+                Name: {buyer?.name}
               </p>
               <p className='mt-2 text-sm  text-gray-600 '>
-                Email: tamanna@gmail.com
+                Email: {buyer?.email}
               </p>
             </div>
             <div className='rounded-full object-cover overflow-hidden w-14 h-14'>
-              {/* <img src={buyer?.photo} alt='' /> */}
+              <img src={buyer?.photo} alt='' />
             </div>
           </div>
           <p className='mt-6 text-lg font-bold text-gray-600 '>
