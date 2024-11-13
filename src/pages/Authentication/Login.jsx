@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import bgImg from "../../assets/images/login.jpg";
 import logo from "../../assets/images/logo.png";
@@ -6,10 +6,16 @@ import { AuthContext } from "../../provider/AuthProvider";
 import toast from "react-hot-toast";
 
 const Login = () => {
-  const { signIn, signInWithGoogle } = useContext(AuthContext);
+  const { signIn, signInWithGoogle, user, loading } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation()
   const form = location.state
+
+  useEffect(() => {
+    if(user){
+      navigate('/')
+    }
+  }, [navigate, user])
 
   // google sign in
   const handleGoogleSignIn = async () => {
@@ -40,6 +46,8 @@ const Login = () => {
       toast.error(error?.message);
     }
   };
+
+  if(user || loading) return;
 
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
