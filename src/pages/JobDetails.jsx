@@ -10,8 +10,7 @@ const JobDetails = () => {
   const [startDate, setStartDate] = useState(new Date());
     const {user} = useContext(AuthContext)
     const job = useLoaderData()
-    const { _id, job_title, category, description, max_price, min_price, deadline, buyer_email, buyer} = job || {};
-
+    const { _id, job_title, category, description, max_price, min_price, deadline, buyer} = job || {};
 
     const handleFormSubmission = async e => {
         e.preventDefault()
@@ -39,7 +38,7 @@ const JobDetails = () => {
           category,
           email,
           status,
-          buyer_email,
+          buyer,
         }
         try {
           const { data } = await axios.post(

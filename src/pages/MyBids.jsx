@@ -3,7 +3,6 @@ import axios from 'axios'
 import { AuthContext } from '../provider/AuthProvider'
 
 const MyBids = () => {
-//   const axiosSecure = useAxiosSecure()
   const { user } = useContext(AuthContext)
 
   const [bids, setBids] = useState([])
@@ -13,7 +12,7 @@ const MyBids = () => {
   }, [user])
 
   const getData = async () => {
-    const { data } = await axiosSecure(`/myBids/${user?.email}`)
+    const { data } = await axios(`${import.meta.env.VITE_API_URL}/myBids/${user?.email}`)
     setBids(data)
   }
   // handleStatus
@@ -25,6 +24,7 @@ const MyBids = () => {
     console.log(data)
     getData()
   }
+  console.log(bids)
   return (
     <section className='container px-4 mx-auto pt-12'>
       <div className='flex items-center gap-x-3'>
