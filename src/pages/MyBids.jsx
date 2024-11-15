@@ -4,7 +4,6 @@ import { AuthContext } from '../provider/AuthProvider'
 
 const MyBids = () => {
   const { user } = useContext(AuthContext)
-
   const [bids, setBids] = useState([])
 
   useEffect(() => {
@@ -15,16 +14,16 @@ const MyBids = () => {
     const { data } = await axios(`${import.meta.env.VITE_API_URL}/myBids/${user?.email}`)
     setBids(data)
   }
-  // handleStatus
-  const handleStatus = async (id, status) => {
+  const handleStatus =async (id, status) => {
+    console.log(id, status)
     const { data } = await axios.patch(
-      `${import.meta.env.VITE_API_URL}/bid/${id}`,
-      { status }
+        `${import.meta.env.VITE_API_URL}/bid/${id}`, {status}
     )
     console.log(data)
-    getData()
-  }
-  console.log(bids)
+    // ui refresh/update
+    getData();
+}
+
   return (
     <section className='container px-4 mx-auto pt-12'>
       <div className='flex items-center gap-x-3'>
